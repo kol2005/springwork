@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.biz.iolist.domain.DeptDTO" alias="DeptDTO" />
+		<typeAlias type="com.biz.iolist.domain.ProductDTO" alias="ProductDTO" />
+		<typeAlias type="com.biz.iolist.domain.IolistDTO" alias="IolistDTO" />
+		<typeAlias type="com.biz.iolist.domain.IolistVO" alias="IolistVO" />
+	</typeAliases>
+</configuration>

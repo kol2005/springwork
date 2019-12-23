@@ -1,0 +1,35 @@
+@charset "UTF-8";
+header{
+	background-color: #f5b335;
+	margin:0;
+	padding:0.8rem;
+	color:white;
+}
+
+nav{
+	margin:0;
+	padding:0;
+	background-color: #3eb5ff;
+	color:#fff;
+}
+
+nav ul{
+	display: flex;
+	list-style: none;
+	margin:0;
+	padding: 0;
+}
+
+nav ul a{
+	display: block;
+	color: inherit;
+	padding:14px 16px;
+	text-decoration: none;
+	/* tag에 action을 지정할때 변화되는 시간 간격을 조절하여 부드럽게 변하는 효과를 내기 */
+	transition:1s;
+}
+nav ul a:hover{
+	background-color: #ddd;
+	color: blue;
+	font-weight: bold;
+}

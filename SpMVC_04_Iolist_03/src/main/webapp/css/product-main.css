@@ -1,0 +1,34 @@
+@charset "UTF-8";
+header{
+	background-color: #00ff00;
+	margin:0;
+	padding: 0.8rem;
+	color:white;
+	text-shadow: 2px 2px 2px blue;
+}
+
+nav{
+	margin:0;
+	padding:0;
+	background-color: #3eb5ff;
+	color: #fff;
+}
+
+nav ul{
+	display: flex;
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+nav ul a{
+	display: block;
+	color:inherit;
+	padding:14px 16px;
+	text-decoration: none;
+	transition:1s;
+}
+nav ul a:hover{
+	background-color: #ddd;
+	color: blue;
+	font-weight: bold;
+}

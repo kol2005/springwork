@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.iolist.persistence.IolistDao">
+ 
+ <select id="selectAll" resultType="IolistDTO">
+ SELECT * FROM tbl_iolist ORDER BY io_seq DESC
+ </select>
+ 
+ <select id="viewSelectAll" resultType="IolistVO">
+ SELECT 
+IO_SEQ AS IO_SEQ,
+IO_DATE AS IO_DATE,
+IO_INOUT AS IO_INOUT,
+
+IO_DCODE AS IO_DCODE,
+D_NAME AS IO_DNAME,
+D_CEO AS IO_DCEO,
+
+IO_PCODE AS IO_PCODE,
+P_NAME AS IO_PNAME,
+P_IPRICE AS IO_IPRICE,
+P_OPRICE AS IO_OPRICE,
+P_VAT AS IO_VAT,
+IO_QTY AS IO_QTY,
+IO_PRICE AS IO_PRICE,
+IO_TOTAL AS IO_TOTAL
+
+FROM tbl_iolist IO
+LEFT JOIN tbl_dept D
+ON IO.io_dcode = D.d_code
+LEFT JOIN tbl_product P
+ON IO.io_pcode = P.p_code
+ORDER BY IO_SEQ DESC
+ </select>
+ 
+ <select id="findBySeq" resultType="IolistVO">
+	 SELECT 
+	IO_SEQ AS IO_SEQ,
+	IO_DATE AS IO_DATE,
+	IO_INOUT AS IO_INOUT,
+	
+	IO_DCODE AS IO_DCODE,
+	D_NAME AS IO_DNAME,
+	D_CEO AS IO_DCEO,
+	
+	IO_PCODE AS IO_PCODE,
+	P_NAME AS IO_PNAME,
+	P_IPRICE AS IO_IPRICE,
+	P_OPRICE AS IO_OPRICE,
+	P_VAT AS IO_VAT,
+	IO_QTY AS IO_QTY,
+	IO_PRICE AS IO_PRICE,
+	IO_TOTAL AS IO_TOTAL
+	
+	FROM tbl_iolist IO
+	LEFT JOIN tbl_dept D
+	ON IO.io_dcode = D.d_code
+	LEFT JOIN tbl_product P
+	ON IO.io_pcode = P.p_code
+	WHERE io_seq = #{io_seq}
+	ORDER BY IO_SEQ DESC
+ </select>
+ 
+ <insert id="insert" parameterType="IolistDTO">
+ INSERT INTO tbl_iolist(
+ IO_SEQ,
+IO_DATE,
+IO_INOUT,
+IO_QTY,
+IO_PRICE,
+IO_TOTAL,
+IO_PCODE,
+IO_DCODE
+)values(
+SEQ_IOLIST.NEXTVAL,
+#{io_date},
+#{io_inout},
+#{io_qty},
+#{io_price},
+#{io_total},
+#{io_pcode},
+#{io_dcode}
+)
+ </insert>
+ 
+ </mapper> 

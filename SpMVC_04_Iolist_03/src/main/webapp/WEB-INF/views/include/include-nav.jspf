@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<nav>
+	<ul class="main-menu">
+		<li><a href="${rootPath}/">매입매출관리</a></li>
+		<li><a href="${rootPath}/product/list">상품관리</a></li>
+		<li><a href="${rootPath}/dept/list">거래처관리</a></li>
+		<%
+		/*
+		USER가 로그인이 되면 Controller에서 USER Attribute에 값을 담아서
+		view로 보낼것이며 USER 값을 검사하여 값이 없으면
+		(empty USER) 로그인 메뉴를 보여주고 값이 있으면
+		(not empty USER, 로그인이 되었으면) 회원관련 메뉴보여주기
+		*/
+		%>
+		<c:if test="${not empty USER}">
+		<li><a href="#">로그아웃</a></li>
+		<li><a href="#">개돼지님 환영합니다</a></li>
+		</c:if>
+		<c:if test="${empty USER}">
+		<li><a href="#">로그인</a></li>
+		<li><a href="#">회원가입</a></li>
+		</c:if>
+	</ul>
+</nav>

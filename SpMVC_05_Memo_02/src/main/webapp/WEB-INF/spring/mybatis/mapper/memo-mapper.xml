@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.memo.persistence.MemoDao">
+
+	<select id="selectAll" resultType="MemoDTO">
+	SELECT * FROM tbl_memo
+	</select>
+	
+	<select id="findById" resultType="MemoDTO">
+	SELECT * FROM tbl_memo WHERE m_seq = #{m_seq}
+	</select>
+	
+	<select id="findByCategory" resultType="MemoDTO">
+	SELECT * FROM tbl_memo WHERE m_cat = #{m_cat}
+	</select>
+	
+	<select id="findBySearch" resultType="MemoDTO">
+	SELECT * FROM tbl_memo WHERE m_subject = #{m_subject}
+	</select>
+
+	<insert id="insert" parameterType="MemoDTO">
+		<selectKey resultType="LONG" keyProperty="m_seq"
+			order="BEFORE">
+			SELECT SEQ_MEMO.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO tbl_memo (
+		M_SEQ,
+		M_DATE,
+		M_TIME,
+		M_AUTH,
+		M_SUBJECT,
+		M_TEXT,
+		M_FLAG,
+		M_FIELD,
+		M_OK,
+		M_CAT
+		)VALUES(
+		#{m_seq,jdbcType=VARCHAR},
+		#{m_date,jdbcType=VARCHAR},
+		#{m_time,jdbcType=VARCHAR},
+		#{m_auth,jdbcType=VARCHAR},
+		#{m_subject,jdbcType=VARCHAR},
+		#{m_text,jdbcType=VARCHAR},
+		#{m_flag,jdbcType=VARCHAR},
+		#{m_field,jdbcType=VARCHAR},
+		#{m_ok,jdbcType=VARCHAR},
+		#{m_cat,jdbcType=VARCHAR}
+		)
+
+	</insert>
+	<update id="update" parameterType="MemoDTO">
+	UPDATE tbl_memo SET
+		
+		M_DATE = #{m_date,jdbcType=VARCHAR},
+		M_TIME = #{m_time,jdbcType=VARCHAR},
+		M_AUTH = #{m_auth,jdbcType=VARCHAR},
+		M_SUBJECT = #{m_subject,jdbcType=VARCHAR},
+		M_TEXT = #{m_text,jdbcType=VARCHAR},
+		M_FLAG = #{m_flag,jdbcType=VARCHAR},
+		M_FIELD = #{m_field,jdbcType=VARCHAR},
+		M_OK = #{m_ok,jdbcType=VARCHAR},
+		M_CAT = #{m_cat,jdbcType=VARCHAR}
+		WHERE M_SEQ = #{m_seq,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM tbl_memo WHERE m_seq = #{m_seq}
+	</delete>
+
+</mapper>

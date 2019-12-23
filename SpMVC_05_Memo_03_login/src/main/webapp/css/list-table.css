@@ -1,0 +1,42 @@
+@charset "UTF-8";
+table{
+	
+	border-collapse: collapse;
+	border-spacing: 0;
+	width:95%;
+	margin: 10px auto;
+	border : 1px solid #ccc;
+	
+}
+
+tr{
+	border: 1px solid #ddd;
+	
+}
+
+th{
+	text-align: left;
+}
+
+td, th{
+	padding:8px;
+	vertical-align: top;
+	/* 만약 */
+	white-space: nowrap;
+}
+
+tr{
+	background-color: gray;
+}
+
+/* tr tag에 content-body 클래스가 있는 친구들한테 */
+tr.content-body:nth-child(even){
+	background-color: #ccc;
+}
+tr.content-body:nth-child(odd){
+	background-color: #fff;
+}
+tr.content-body:hover{
+	background-color: #ddd;
+	cursor: pointer;
+}

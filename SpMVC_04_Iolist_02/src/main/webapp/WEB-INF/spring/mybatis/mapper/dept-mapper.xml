@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.iolist.persistence.DeptDao">
+ 
+ 	<select id="selectAll" resultType="DeptDTO">
+ 	SELECT * FROM tbl_dept ORDER BY d_name, d_ceo
+ 	</select>
+ 	
+ 	<select id="findAll" resultType="DeptDTO">
+ 	SELECT * FROM tbl_dept ORDER BY d_code
+ 	</select>
+ 	
+ 	<select id="getDCode" resultType="String">
+ 	SELECT MAX(d_code) FROM tbl_dept
+ 	</select>
+ 	
+ 	<select id="findByDCode" resultType="DeptDTO">
+ 	 	SELECT * FROM tbl_dept WHERE d_code = #{d_code}	
+ 	 	
+ 	</select>
+
+  	<select id="findById"></select>
+  	
+ 	<insert id="insert" parameterType="DeptDTO">
+ 	INSERT INTO tbl_dept (
+ 	D_CODE,
+	D_NAME,
+	D_CEO,
+	D_TEL,
+	D_ADDR
+	)VALUES(
+	#{d_code,jdbcType=VARCHAR},
+	#{d_name,jdbcType=VARCHAR},
+	#{d_ceo,jdbcType=VARCHAR},
+	#{d_tel,jdbcType=VARCHAR},
+	#{d_addr,jdbcType=VARCHAR}
+	)
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="DeptDTO">
+ 	UPDATE tbl_dept SET
+	D_NAME = #{d_name},
+	D_CEO = #{d_ceo},
+	D_TEL = #{d_tel},
+	D_ADDR = #{d_addr}
+ 	WHERE d_code = #{d_code}
+ 	
+ 	</update>
+ 	<delete id="delete">
+ 	DELETE FROM tbl_dept
+ 	WHERE d_code = #{d_code}
+ 	</delete>
+ 
+ </mapper> 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- mybatis spring-JDBC dbcp 를 사용하여 DBConnection을 수행하기 위한 설정 -->
+
+	<!-- dbcp(Database Connection pool ojdbc드라이버와 연동되어서 DB 연결정보를 정해진 개수만큼 미리 
+		설정해 두고 (요청)필요에 따라서 connection을 연결시켜주는 클래스
+		dbcp와 dbcp2가 있다
+		dbcp java 1.7 이하에서 사용
+		dbcp2 java 1.8 이상에서 호환성에 문제가 없다 -->
+	<bean id="oracleDS" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="user3" />
+		<property name="password" value="1234" />
+	</bean>
+	
+	<!-- dataSource를 주입할때 value가 아니고 ref로 주입해야 한다 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="oracleDS"/>
+		<property name="configLocation" value="/WEB-INF/spring/appServlet/mybatis/mybatis-config.xml"/>
+		<property name="mapperLocations" value="/WEB-INF/spring/appServlet/mybatis/mapper/*-mapper.xml"/>
+	</bean>
+	
+	<!-- dataSource를 주입할때 value가 아니고 ref로 주입해야 한다 -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="oracleDS"/>
+	</bean>
+	
+	<!-- sqlSessionTemplate의 생성자에 sessionFatory 주입 -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg index="0" ref="sqlSessionFactory"/>
+	</bean>
+</beans>

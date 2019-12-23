@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<title>□□□나의 JSP 페이지□□□</title>
+<%
+/*
+css?ver=
+실제로는 아무런 역할을 수행하지 않는 코드
+브라우저가 파일의 이름이 변경이 되면
+브라우저에 있는 cache(방문기록)을 삭제해주는 기능이 작동을 한다
+
+css파일의 내용을 변경했을 경우
+ver=값을 현재값과 다른 값으로 변경해주자
+ver=값을 변경한 후에는 서버를 restart 해주자
+*/
+%>
+<link rel="stylesheet" href="${rootPath}/css/home.css?ver=20191121001" type="text/css">

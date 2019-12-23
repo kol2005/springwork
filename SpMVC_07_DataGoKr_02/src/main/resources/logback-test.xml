@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+<!-- 선언문 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+		<charset>UTF-8</charset>
+		<pattern>[%level] %msg [%file:%line] [%logger{100}] %n</pattern>
+		</encoder>
+			
+	</appender>
+	
+	<appender name="myPattern" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+		<charset>UTF-8</charset>
+		<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg %n [%level] %msg [%file:%line] [%logger{100}] %n
+			</pattern>
+		</encoder>
+	</appender>
+	<!-- 
+	level
+	log.debug(문자열)
+	TRACE
+	DEBUG
+	WARN
+	INFO
+	 -->
+	 <logger name="com.biz.gdata.service" level="debug">
+	 <appender-ref ref="STDOUT"/>
+	 </logger>
+	  <logger name="com.biz.gdata.controller" level="debug">
+	 <appender-ref ref="myPattern"/>
+	 </logger>
+	<!-- Spring 실행 과정을 감시하라 -->
+	<root level="WARN">
+	<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>
