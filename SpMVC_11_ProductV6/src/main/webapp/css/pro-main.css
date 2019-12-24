@@ -1,0 +1,101 @@
+@charset "UTF-8";
+div {
+	margin: 5px;
+}
+
+div.row {
+	margin: 0 auto;
+}
+
+div#p_List {
+	height: 600px;
+	overflow: auto;
+}
+
+
+.main-img-box{
+position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.main-img-box .img-menu{
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+width: 100%;
+opacity: 0;
+transition: 0.5 ease;
+background-color: #008cba;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.main-img-box:hover .img-menu{
+opacity: 1;
+}
+.img-text{
+color:white;
+font-size: 1rem;
+text-align: center;
+display: inline-block;
+padding: 20px;
+}
+.img-text:hover{
+	color:yellow;
+	cursor: pointer;
+	border: 1px solid yellow;
+	border-radius: 10px;
+}
+
+td, th{
+white-space: nowrap;
+}
+
+
+.sub-img-box{
+position: relative;
+display: inline-block;
+justify-content: center;
+align-items: center;
+width:110px;
+height: 110px;
+}
+.sub-img-box .img-menu{
+position: absolute;
+top: -7px;
+bottom: -7px;
+left: -7px;
+right: -7px;
+width: 100%;
+opacity: 0;
+transition: 0.9 ease;
+background-color: #008cba;
+}
+.sub-img-box:hover .img-menu{
+opacity: .8;
+}
+.sub-img-box img{
+	width: 100%;
+	height: auto;
+}
+span.img-delete, span.img-view{
+
+
+padding: 50px;
+margin: 0px;
+color: white;
+font-size: 10rem;
+cursor: pointer;
+}
+
+span.img-delete:hover, span.img-view:hover{
+	border: 1px solid yellow;
+color: yellow;
+font-weight: bold;
+padding: 15px;
+margin: 0;	
+
+}

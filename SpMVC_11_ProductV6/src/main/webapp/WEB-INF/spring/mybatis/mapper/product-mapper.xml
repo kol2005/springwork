@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biz.product.persistence.ProductDao">
+  
+  <select id="proTotalCount" resultType="Long">
+  	SELECT COUNT (*) FROM tbl_product
+  	<where>
+  	<foreach collection="p_names" item="p_name" separator="OR">
+  	p_name LIKE '%' || #{p_name,jdbcType=VARCHAR} || '%'
+  	</foreach>
+  	</where>
+  </select>
+  
+    <select id="findByPNameListAndPagenation" resultMap="proAndFiles">
+	SELECT * FROM
+		(
+		SELECT /*+ FIRST_ROWS_100 */ ROWNUM AS NUM, IP.* FROM
+			(
+			SELECT /*+ INDEX_DESC(P) */ * FROM tbl_product P
+			<where>
+				<foreach collection="p_names" item="p_name" separator="OR">
+				p_name LIKE '%' || #{p_name,jdbcType=VARCHAR} || '%'
+				</foreach>
+			</where>
+			) IP
+		WHERE ROWNUM &lt;= #{pageDTO.limit}
+		) TBL
+	WHERE NUM &gt;= #{pageDTO.offset}
+  </select>
+  
+    <select id="selectPagenation" resultMap="proAndFiles">
+	SELECT * FROM
+		(
+		SELECT /*+ FIRST_ROWS_100 */ ROWNUM AS NUM, IP.* FROM
+			(
+			SELECT /*+ INDEX_DESC(P) */ * FROM tbl_product P
+			) IP
+		WHERE ROWNUM &lt;= #{limit}
+		) TBL
+	WHERE NUM &gt;= #{offset}
+  </select>
+  
+  
+  <select id="selectAll" resultMap="proAndFiles">
+    SELECT * FROM tbl_product ORDER BY p_code DESC
+  </select>
+  
+  <resultMap type="proDTO" id="proAndFiles">
+  <id column="p_code" property="p_code"/>
+<result column="p_name" property="p_name" />
+<result column="p_iprice" property="p_iprice" />
+<result column="p_oprice" property="p_oprice" />
+<result column="p_vat" property="p_vat" />
+<result column="p_file" property="p_file" />
+
+  <collection property="p_files" column="p_code" ofType="proFileDTO" select="findByPCodeFiles" />
+  </resultMap>
+  
+  <select id="findByPCode" resultMap="proAndFiles">
+    SELECT * FROM tbl_product WHERE p_code = #{p_code}
+  </select>
+  
+  <select id="findByPCodeFiles" resultType="proFileDTO">
+  SELECT * FROM tbl_files WHERE file_p_code = #{p_code}
+  </select>
+  
+  <select id="findByPNames" resultType="proDTO">
+    SELECT * FROM tbl_product WHERE p_name LIKE '%' || #{p_name} || '%'
+  </select>
+  
+  <!-- resultType이 기본형(int, float, String)일 경우는
+  별도로 명시하지 않아도 문제가 없었는데
+  현재 3.5에서 문젝 ㅏ발생하므로 resultType을 명시 해주자 -->
+  <select id="getMaxPCount" resultType="String">
+  SELECT MAX(p_code) FROM tbl_product
+  </select>
+  
+  <!-- 현재 3.5 에서는 parameterType을 사용하지 않아도
+  데이터를 잘 가져온다 , 하지만 호환성을 위해서 사용을 해주자 -->
+  <insert id="insert" parameterType="proDTO">
+	INSERT INTO tbl_product(
+		P_CODE,
+		P_NAME,
+		P_IPRICE,
+		P_OPRICE,
+		P_VAT,
+		P_FILE
+	)VALUES(
+		#{p_code,jdbcType=VARCHAR},
+		#{p_name,jdbcType=VARCHAR},
+		#{p_iprice,jdbcType=VARCHAR},
+		#{p_oprice,jdbcType=VARCHAR},
+		#{p_vat,jdbcType=VARCHAR},
+		#{p_file,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+  <update id="update" parameterType="proDTO">
+  UPDATE tbl_product SET
+		P_NAME = #{p_name,jdbcType=VARCHAR},
+		P_IPRICE = #{p_iprice,jdbcType=VARCHAR},
+		P_OPRICE = #{p_oprice,jdbcType=VARCHAR},
+		P_VAT = #{p_vat,jdbcType=VARCHAR},
+		P_FILE = #{p_file,jdbcType=VARCHAR}
+	WHERE P_CODE = #{p_code,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

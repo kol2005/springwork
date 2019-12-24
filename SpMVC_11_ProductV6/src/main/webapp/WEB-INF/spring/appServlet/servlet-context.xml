@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- tomcat이 직접 관리하지 않는 폴더를 외부에서 가상폴더로 접근할수 있도록 만들어주는 클래스
+	/context/files 라는 폴더에 접근을 하면 로컬의 c:/bizwork/files 폴더를 열어주어라
+	<beans:bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+	</beans:bean>
+	 -->
+	 
+	<!-- spring project에서 전체적으로 사용할 static final 변수 선언 -->
+	<beans:bean id="winFilePath" class="java.lang.String">
+	<beans:constructor-arg value="c:/bizwork/files/" />
+	</beans:bean>
+	
+	<beans:bean id="macFilePath" class="java.lang.String">
+	<beans:constructor-arg value="/User/계정ID/Document/work/files/" />
+	</beans:bean>
+	
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/html/**" location="/html/" />
+	<resources mapping="/css/**" location="/css/" />
+	<resources mapping="/js/**" location="/js/" />
+	
+	<!-- <resources mapping="/files/**,/filesMac/**" location="file:///c:/bizwork/files/,file:///Users/계정ID/Document/work/files/" /> -->
+	<resources mapping="/files/**" location="file:///c:/bizwork/files/" />
+	<resources mapping="/filesMac/**" location="file:///Users/계정ID/Document/work/files/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	<!-- commons-io, commoins-fileupload를 사용하여 파일을 업로드를 수행할때 업로드에 대한 설정을 수행하는 클래스 
+	maxUploadSize : 한번에 upload 할수 있는 파일(들)의 최대 크기
+	maxUploadSizePerFile : upload 할수 있는 파일 1개의 최대 크기-->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="maxUploadSize" value="100048579"/>
+	<beans:property name="maxUploadSizePerFile" value="30000000"></beans:property>
+	</beans:bean>
+	
+	<context:component-scan base-package="com.biz.product.service" />
+	<context:component-scan base-package="com.biz.product.controller" />
+	
+	
+	
+</beans:beans>
