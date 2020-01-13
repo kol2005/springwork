@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+			<property name="maxUploadSize" value="50000000"/>
+			<property name="maxUploadSizePerFile" value="50000000"/>
+		</bean>
+		
+		<!--
+		 일방통행방식 암호화 알고리즘
+		평문을 암호화 시키는 method는 있지만
+		암호문을 평문으로 복호화 시키는 method는 없다
+		
+		평문을 암호화 하여 저장하고
+		평문과 암호문을 match하는 method를 사용하여
+		값이 일치하는가를 검사하는 방식 -->
+		<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg index="0" value="4"/>
+		</bean>
+</beans>

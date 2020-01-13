@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.biz.rbooks.repository.BookDao">
+
+<select id="selectAll" resultType="booksVO">
+	SELECT * FROM tbl_books
+</select>
+
+<delete id="delete">
+DELETE FROM tbl_books WHERE b_code = #{b_code}
+</delete>
+
+<insert id="insert" parameterType="booksVO">
+INSERT INTO tbl_books (
+
+B_CODE,
+B_NAME,
+B_AUTHER,
+B_COMP,
+B_YEAR,
+B_IPRICE
+
+)VALUES(
+#{b_code,jdbcType=VARCHAR},
+#{b_name,jdbcType=VARCHAR},
+#{b_auther,jdbcType=VARCHAR},
+#{b_comp,jdbcType=VARCHAR},
+#{b_year,jdbcType=VARCHAR},
+#{b_iprice,jdbcType=VARCHAR}
+)
+</insert>
+
+<select id="findByBCode" resultType="booksVO">
+SELECT * FROM tbl_books WHERE b_code = #{b_code}
+</select>
+
+<update id="update" parameterType="booksVO">
+UPDATE tbl_books SET
+
+B_CODE = #{b_code,jdbcType=VARCHAR},
+B_NAME = #{b_name,jdbcType=VARCHAR},
+B_AUTHER = #{b_auther,jdbcType=VARCHAR},
+B_COMP = #{b_comp,jdbcType=VARCHAR},
+B_YEAR = #{b_year,jdbcType=VARCHAR},
+B_IPRICE = #{b_iprice,jdbcType=VARCHAR}
+
+WHERE B_CODE = #{b_code,jdbcType=VARCHAR}
+</update>
+
+</mapper>

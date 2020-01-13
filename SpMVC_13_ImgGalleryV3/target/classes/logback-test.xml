@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<appender name="mylog" class="ch.qos.logback.core.ConsoleAppender">
+		<layout>
+			<pattern>
+				%d{HH:mm:ss}[%thread] %-5level %logger{32} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	
+	<logger name="com.biz.gallery.controller" level="DEBUG" additivity="false">
+		<appender-ref ref="mylog"/>
+	</logger>
+	<logger name="com.biz.gallery.service" level="DEBUG" additivity="false">
+		<appender-ref ref="mylog"/>
+	</logger>
+		<logger name="com.biz.gallery.interceptor" level="DEBUG" additivity="false">
+		<appender-ref ref="mylog"/>
+	</logger>
+	
+	<root level="WARN">
+	<appender-ref ref="mylog"/>
+	</root>
+</configuration>

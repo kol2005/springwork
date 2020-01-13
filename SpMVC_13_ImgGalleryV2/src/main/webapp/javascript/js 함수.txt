@@ -1,0 +1,26 @@
+function funca(text){
+	alert("나는 func a 입니다"+text)
+}
+
+// 함수를 변수 선언하는 것처럼 만드는 방법
+// 함수를 변수로 선언 = 객체를 변수로 선언하는 것과 같은 원리
+// 함수를 변수로 선언할수 있는 몇가지 언어들이 있다
+// JS는 함수를 변수로 선언하는 대표적인 문법을 가진 언어
+// JS의 함수를 1급함수다 라고 한다
+var funcb = function(text){
+	alert("나는 func b 입니다")
+}
+function funcTest(){
+	funca("우리나라")
+	funcb("korea")
+}
+
+// 화살표 함수
+// JS 2015 버전이상에서 사용가능
+var funcc = ()->{
+	alert("나는 func c 입니다")
+}
+
+var funcb = (text)-> {
+	alert("나는 func b 입니다")
+}
