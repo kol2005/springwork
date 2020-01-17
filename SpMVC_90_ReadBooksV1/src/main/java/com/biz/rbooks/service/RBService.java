@@ -34,8 +34,25 @@ public class RBService {
 		return rbDao.getBCode(rb_bcode);
 	}
 
-	public RBookVO findByBCode(String b_code) {
-		return null;
+	public List<RBookVO> findByBCode(String b_code) {
+		return rbDao.findByBCode(b_code);
+	}
+
+	public int insert(RBookVO rBookVO) {
+		int ret = rbDao.insert(rBookVO);
+		return ret;
+	}
+
+	public RBookVO findBySeq(long rb_seq) {
+		return rbDao.findBySeq(rb_seq);
+	}
+
+	public int update(RBookVO rBookVO) {
+		return rbDao.update(rBookVO);
+	}
+
+	public int delete(long rb_seq) {
+		return rbDao.delete(rb_seq);
 	}
 	
 	

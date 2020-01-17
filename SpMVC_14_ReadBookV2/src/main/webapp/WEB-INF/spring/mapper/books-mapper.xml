@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.biz.rbooks.repository.BookDao">
+
+	<select id="findByBNames" resultType="bookVO">
+		SELECT * FROM tbl_books
+		<where>
+			<foreach collection="names" item="bVO" separator="OR">
+				b_name Like '%' || #{bVO} || '%'
+			</foreach>
+		</where>
+	</select>
+	
+	<select id="findByBNames2" resultType="bookVO">
+		SELECT * FROM tbl_books
+		<if test="#{names != null}">
+			<foreach collection="names" item="bVO" open="WHERE" close="" separator="OR">
+				b_name Like '%' || #{bVO} || '%'
+			</foreach>
+		</if>
+	</select>
+	
+
+ 	<insert id="insert" parameterType="bookVO">
+ 	INSERT INTO tbl_books(
+	 	B_CODE,
+		B_NAME,
+		B_AUTHER,
+		B_COMP,
+		B_YEAR,
+		B_IPRICE
+	)VALUES(
+		#{b_code,jdbcType=VARCHAR},
+		#{b_name,jdbcType=VARCHAR},
+		#{b_auther,jdbcType=VARCHAR},
+		#{b_comp,jdbcType=VARCHAR},
+		#{b_year,jdbcType=VARCHAR},
+		#{b_iprice,jdbcType=VARCHAR}
+	)
+ 	</insert>
+ 	
+ 	
+ 	<update id="update"></update>
+ 
+ </mapper> 

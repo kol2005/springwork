@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.biz.rbooks.repository.ReadBookDao">
+	
+	<select id="selectAll" resultType="rBookVO">
+		SELECT 
+			RB_SEQ,
+			RB_BCODE,
+			B_NAME AS RB_BNAME,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+		FROM tbl_read_book R,tbl_books B
+		WHERE R.rb_bcode = b.b_code
+	</select>
+
+	<select id="findBySeq" resultType="rBookVO">
+		SELECT 
+			RB_SEQ,
+			RB_BCODE,
+			B_NAME AS RB_BNAME,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+		FROM tbl_read_book R,tbl_books B
+		WHERE R.rb_bcode = b.b_code AND R.rb_seq = #{rb_seq}
+	</select>
+
+
+ 	<insert id="insert" parameterType="rBookVO">
+ 	INSERT INTO tbl_read_book(
+	 	RB_SEQ,
+		RB_BCODE,
+		RB_DATE,
+		RB_STIME,
+		RB_RTIME,
+		RB_SUBJECT,
+		RB_TEXT,
+		RB_STAR
+	)VALUES(
+		SEQ_READ_BOOK.NEXTVAL,
+		#{rb_bcode,jdbcType=VARCHAR},
+		#{rb_date,jdbcType=VARCHAR},
+		#{rb_stime,jdbcType=VARCHAR},
+		#{rb_rtime,jdbcType=VARCHAR},
+		#{rb_subject,jdbcType=VARCHAR},
+		#{rb_text,jdbcType=VARCHAR},
+		#{rb_star,jdbcType=VARCHAR}
+	)
+ 	</insert>
+ 	
+ 	<select id="findByBCode" resultType="rBookVO">
+ 		SELECT 
+			RB_SEQ,
+			RB_BCODE,
+			B_NAME AS RB_BNAME,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+		FROM tbl_read_book R,tbl_books B
+		WHERE R.rb_bcode = #{b_code,jdbcType=VARCHAR} AND R.rb_bcode = b.b_code
+		
+ 	</select>
+ 
+ </mapper> 

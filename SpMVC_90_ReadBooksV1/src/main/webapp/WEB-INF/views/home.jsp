@@ -33,6 +33,15 @@ $(function(){
 		document.location.href = "${rootPath}/books/list"
 	})
 	
+	$("#btn_read_insert").click(function(){
+		document.location.href = "${rootPath}/rbook/insert"
+	})
+	
+	$("#rbook-list tbody tr").click(function(){
+		let rb_seq = $(this).attr("data-id")
+		document.location.href = "${rootPath}/rbook/rbookinfo/" + rb_seq
+	})
+	
 })
 </script>
 </head>
@@ -40,7 +49,7 @@ $(function(){
 <h1>도서정보</h1>
 </header>
 <body>
-	<table>
+	<table id="rbook-list">
 	<tr>
 		<td>사용자 ID</td>
 		<td>도서코드</td>
@@ -53,18 +62,20 @@ $(function(){
 	<tr>
 	<td>
 	<c:if test="${!empty rbList}">
-	<c:forEach items="${bookList}" var="books">
-	<c:forEach items="${mList}" var="member">
+	
 	<c:forEach items="${rbList}" var="rbook">
-		<td>${member.m_id}</td>
-		<td>${books.b_code}</td>
-		<td>${books.b_name}</td>
+	<tbody>
+		<tr data-id="${rbook.rb_seq}">
+		<td>사용자ID</td>
+		<td>${rbook.rb_bcode}</td>
+		<td>${rbook.rb_bname}</td>
 		<td>${rbook.rb_date}</td>
 		<td>${rbook.rb_subject}</td>
 		<td>${rbook.rb_star}</td>
+		</tr>
+	</tbody>
 	</c:forEach>
-	</c:forEach>
-	</c:forEach>
+
 	</c:if>
 	</td>
 	</tr>
@@ -73,7 +84,7 @@ $(function(){
 	
 	<section>
 		<button id="btn_book_list" class="bz-button">도서 리스트</button>
-		<button id="btn_member_list" class="bz-button">독서 리스트</button>
+		<button id="btn_read_insert" class="bz-button">독서 리스트 작성</button>
 	</section>
 
 </body>

@@ -35,6 +35,10 @@ $(function(){
 		document.location.href = "${rootPath}/books/insert"
 	})
 	
+	$("#btn_list").click(function(){
+		document.location.href = "${rootPath}/"
+	})
+	
 	var contextCallBack = function(key, options){
 		/*
 		if(key == 'edit'){
@@ -120,7 +124,7 @@ $(function(){
 	</table>
 	<section>
 	<button id="btn_book_insert" class="bz-button">도서정보 새로입력</button>
-	<button id="btn_book_delete" class="bz-button">도서정보 삭제</button>
+	<button id="btn_list" class="bz-button">리스트</button>
 	</section>
 	
 

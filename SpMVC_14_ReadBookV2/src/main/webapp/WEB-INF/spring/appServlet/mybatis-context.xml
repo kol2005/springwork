@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+<!--
+ 암호화를 수행하는 초기값 설정 암호화 알고리즘과 saltPass를 설정
+server의 환경변수중에 ORACLE_PASS로 등록된 값을 가져와서 사용한다 -->
+<bean id="envConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+	<property name="algorithm" value="PBEWithMD5AndDES"/>
+	<property name="passwordEnvName" value="ORACLE_PASS"/>
+</bean>
+
+<!--
+ 암호문을 해독하는 클래스 해독할때 envConfig에 설정된 값으로 암호문 해독을 준비 -->
+<bean id="configEnc" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+	<property name="config" ref="envConfig"/>
+</bean>
+
+<!-- 
+ oracle.sec.properties에 설정된 변수를 가져와서 
+ ENC() method를 사용하여 평문으로 변경된 username과 password를 만들고
+ dataSource에서 사용할수 있도록 변환 -->
+<bean class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+	<constructor-arg ref="configEnc"/>
+	<property name="location" value="/WEB-INF/spring/oracle.sec.properties"/>
+</bean>
+
+<!-- 
+${oracle.username} : ENC(암호문)의 method를 호출하는 구조
+return 되는 username을 value에 주입 -->
+<bean id="oracleDS" class="org.apache.commons.dbcp2.BasicDataSource">
+	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+	<property name="username" value="${oracle.username}"/>
+	<property name="password" value="${oracle.password}"/>
+	
+	<property name="validationQuery" value="SELECT 1 FROM DUAL"/>
+	<property name="validationQueryTimeout" value="7200000"/>
+	<property name="testWhileIdle" value="true"/>
+</bean>
+
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="oracleDS"/>
+	<property name="mapperLocations" value="/WEB-INF/spring/mapper/*-mapper.xml"/>
+	<property name="typeAliasesPackage" value="com.biz.rbooks.domain"/>
+</bean>
+
+<bean class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg index="0" ref="sqlSessionFactory"/>
+</bean>
+
+<mybatis-spring:scan base-package="com.biz.rbooks.repository"/>
+
+</beans>

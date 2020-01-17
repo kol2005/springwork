@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#search-table{
+	background-color: white;
+	border-collapse: collapse;
+	width: 90%;
+
+	margin: 10px auto;
+	border-bottom: 1px solid #ddd;
+	height: 100%;
+}
+
+#search-table td, #search-table th{
+	white-space: nowrap;
+	text-align: left;
+	padding: 8px;
+	vertical-align: top;
+}
+
+

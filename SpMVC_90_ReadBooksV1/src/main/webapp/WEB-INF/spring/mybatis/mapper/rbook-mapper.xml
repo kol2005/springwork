@@ -3,11 +3,92 @@
 <mapper namespace="com.biz.rbooks.repository.RBDao">
 
 <select id="selectAll" resultType="rbookVO">
-	SELECT * FROM tbl_read_book
+	SELECT 
+			RB_SEQ,
+			RB_BCODE,
+			B_NAME AS RB_BNAME,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+	 FROM tbl_read_book R,tbl_books B
+	 WHERE R.rb_bcode = B.b_code
 </select>
 
+<select id="findBySeq" resultType="rbookVO">
+		SELECT
+			RB_SEQ,
+			RB_BCODE,
+			B_NAME AS RB_BNAME,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+		FROM tbl_read_book R,tbl_books B
+		WHERE R.rb_bcode = b.b_code AND R.rb_seq = #{rb_seq}
+</select>
+	
+	
 <select id="getBCode" resultType="rbookVO">
 	SELECT * FROM tbl_read_book WHERE rb_bcode = #{rb_bcode}
 </select>
+
+<select id="findByBCode" resultType="rbookVO">
+		SELECT 
+			RB_SEQ,
+			RB_BCODE,
+			B_NAME AS RB_BNAME,
+			RB_DATE,
+			RB_STIME,
+			RB_RTIME,
+			RB_SUBJECT,
+			RB_TEXT,
+			RB_STAR
+		FROM tbl_read_book R,tbl_books B
+		WHERE R.rb_bcode = #{b_code,jdbcType=VARCHAR} AND R.rb_bcode = B.b_code
+</select>
+
+<insert id="insert" parameterType="rbookVO">
+INSERT INTO tbl_read_book(
+	 	RB_SEQ,
+		RB_BCODE,
+		RB_DATE,
+		RB_STIME,
+		RB_RTIME,
+		RB_SUBJECT,
+		RB_TEXT,
+		RB_STAR
+		)VALUES(
+		SEQ_READ_BOOK.NEXTVAL,
+		#{rb_bcode,jdbcType=VARCHAR},
+		#{rb_date,jdbcType=VARCHAR},
+		#{rb_stime,jdbcType=VARCHAR},
+		#{rb_rtime,jdbcType=VARCHAR},
+		#{rb_subject,jdbcType=VARCHAR},
+		#{rb_text,jdbcType=VARCHAR},
+		#{rb_star,jdbcType=VARCHAR}
+		)
+</insert>
+
+<delete id="delete">
+DELETE FROM tbl_read_book WHERE rb_seq = #{rb_seq}
+</delete>
+
+<update id="update" parameterType="rbookVO">
+UPDATE tbl_read_book SET
+		RB_BCODE = #{rb_bcode,jdbcType=VARCHAR},
+		RB_DATE = #{rb_date,jdbcType=VARCHAR},
+		RB_STIME = #{rb_stime,jdbcType=VARCHAR},
+		RB_RTIME = #{rb_rtime,jdbcType=VARCHAR},
+		RB_SUBJECT = #{rb_subject,jdbcType=VARCHAR},
+		RB_TEXT= #{rb_text,jdbcType=VARCHAR},
+		RB_STAR = #{rb_star,jdbcType=VARCHAR}
+		WHERE rb_seq = #{rb_seq,jdbcType=VARCHAR}
+</update>
+
 
 </mapper>

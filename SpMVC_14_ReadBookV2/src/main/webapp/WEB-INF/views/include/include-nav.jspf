@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script>
+$(function(){
+	
+	$(".menu-item").click(function(){
+		let menu_text = $(this).text()
+		let menu_href = "${rootPath}/"
+		
+		if(menu_text == '도서리스트') {
+			menu_href += "book/list"
+		}else if(menu_text =='로그인'){
+			menu_href += "member/login"
+		}else if (menu_text =='회원가입'){
+			menu_href += "member/join"
+		}else if (menu_text =='로그아웃'){
+			menu_href += "member/logout"
+		}
+		document.location.href = menu_href
+	})
+	
+})
+</script>
+<nav>
+	<ul id="main-menu">
+		<li class="menu-item">home</li>
+		<li class="menu-item">도서리스트</li>
+		<c:if test="${empty MEMBER}">
+		<li class="menu-item flex-right">로그인</li>
+		<li class="menu-item">회원가입</li>
+		</c:if>
+		<c:if test="${!empty MEMBER}">
+		<li class="menu-item flex-right">로그아웃</li>
+		<li class="menu-item">(사용자ID)</li>
+		</c:if>
+	</ul>
+</nav>

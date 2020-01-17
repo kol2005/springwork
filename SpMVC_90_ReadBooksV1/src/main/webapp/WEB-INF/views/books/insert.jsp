@@ -33,6 +33,8 @@ $(function(){
 	<button>저장</button>
 	</form:form>
 	</fieldset>
+	
+
 
 </body>
 </html>
