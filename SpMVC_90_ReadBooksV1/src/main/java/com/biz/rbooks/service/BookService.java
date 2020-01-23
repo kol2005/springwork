@@ -1,5 +1,6 @@
 package com.biz.rbooks.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,6 +41,12 @@ public class BookService {
 
 	public int update(BooksVO booksVO) {
 		return bDao.update(booksVO);
+	}
+
+	public List<BooksVO> findByBNames(String strText) {
+		List<String> names = Arrays.asList(strText.split(" "));
+		List<BooksVO> bookList = bDao.findByBNames(names);
+		return bookList;
 	}
 	
 }

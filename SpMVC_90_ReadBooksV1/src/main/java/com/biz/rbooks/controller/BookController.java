@@ -2,8 +2,6 @@ package com.biz.rbooks.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.biz.rbooks.domain.BooksVO;
@@ -38,6 +34,13 @@ public class BookController {
 	public String list(Model model) {
 		List<BooksVO> bookList = bService.selectAll();
 		model.addAttribute("bookList",bookList);
+		return "book";
+	}
+	
+	@RequestMapping(value="/search",method=RequestMethod.POST)
+	public String search(@RequestParam(value="strText",required = false,defaultValue = "")String strText,Model model) {
+		List<BooksVO> bookList = bService.findByBNames(strText);
+		model.addAttribute("BLIST",bookList);
 		return "book";
 	}
 	

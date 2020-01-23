@@ -1,0 +1,17 @@
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\service\NaverLoginService.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\controller\EMSController.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\repository\EmailDao.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\service\SaveMailService.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\mapper\MybatisEmailDao.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\EmailVO2.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\controller\HomeController.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\controller\MemberController.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\Main.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\domain\NaverLoginOK.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\controller\MybatisRestController.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\service\SendMailService.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\domain\EmailVO.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\MakeNaverSec.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\service\MybatisService.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\utills\CustomPhysicalnamingStrategy.java
+C:\bizwork\springwork\SpMVC_16_EMS_V2\src\main\java\com\biz\ems\utills\CustomPhysicalnamingStrategyV2.java

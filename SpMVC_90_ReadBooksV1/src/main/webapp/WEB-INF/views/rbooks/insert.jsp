@@ -12,8 +12,40 @@
 $(function(){
 	
 	$("#btn_rbook_insert").click(function(){
+		//if($("#rb_bcode").val() == ""){
+			//alert("도서 코드는 반드시 입력해야 합니다")
+			//$("#rb_bcode").focus()
+			//return false
+		//}
+		if(parseInt($("#rb_rtime").val()) < 1){
+			alert("도서 시간은 반드시 입력해야 합니다")
+			$("#rb_rtime").focus()
+			return false
+		}
+		if($("#rb_subject").val() == ""){
+			alert("한줄평은 반드시 입력해야 합니다")
+			$("#rb_subject").focus()
+			return false
+		}
+		//$("form").submit()
 		document.location.href = "${rootPath}/rbooks/insert"
 	})
+	$("#rb_bname,#rb_rtime,#rb_bcode,#rb_subject").focus(function(){
+		$(this).select()
+	})
+	
+	$("#rb_bname").keypress(function(event){
+		if(event.keyCode == 13){
+			let strText = $(this).val()
+			if(strText == ""){
+				alert("도서이름을 입력한 후 Enter")
+				return false
+			}
+			
+		}
+		
+	})
+
 	
 })
 </script>

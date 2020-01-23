@@ -18,4 +18,6 @@ public interface BookDao {
 
 	public BooksVO findByBCode(@Param("b_code") String b_code);
 
+	public List<BooksVO> findByBNames(@Param("names")List<String> names);
+
 }
