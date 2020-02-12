@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.bbs.mapper.BbsDao">
+ 
+ <!-- 
+ tbl_bbs 테이블 1개를 self join을 해서
+ 게시판 원글과 원글에 딸린 답글을 동시에 select하여 수행하는 방식
+ 
+ 원글을 select를 수행하고
+ 원글의 bbs_id값을 selectSub에 전송하여 bbs_id와 bbs_p_id가 같은
+ 또다른 리스트를 select 수행하고
+ 
+ 그 결과를 BBsVO의 List<BBsVO> bbs_replay 변수에 담아서
+ 한번에 view로 전송하는 방식
+  -->
+ 	<select id="selectMain" resultMap="bbsReplay">
+ 		SELECT * FROM tbl_bbs WHERE bbs_p_id IS NULL OR bbs_p_id = 0
+ 	</select>
+ 	
+ 	<resultMap type="bbsVO" id="bbsReplay">
+ 		<id column="bbs_id" property="bbs_id" />
+ 		<collection property="bbs_replay" column="bbs_id" ofType="bbsVO" select="selectSub"
+ 		fetchType="lazy"/>
+ 	</resultMap>
+ 	
+ 	
+ 	
+ 	<select id="selectSub" resultType="bbsVO">
+ 		SELECT * FROM tbl_bbs WHERE bbs_p_id = #{bbs_id}
+ 	</select>
+ 	
+ 
+ 	<insert id="insert">
+ 	INSERT INTO `tbl_bbs`
+		(`BBS_ID`,
+		`BBS_P_ID`,
+		`BBS_WRITER`,
+		`BBS_DATE`,
+		`BBS_TIME`,
+		`BBS_SUBJECT`,
+		`BBS_CONTENT`,
+		`BBS_COUNT`)
+		VALUES
+		(
+		#{bbs_id},
+		#{bbs_p_id},
+		#{bbs_writer},
+		#{bbs_date},
+		#{bbs_time},
+		#{bbs_subject},
+		#{bbs_content},
+		#{bbs_count}
+		);
+
+ 	</insert>
+ 	
+ 	<update id="update">
+ 	UPDATE `tbl_bbs`
+		SET
+		`bbs_p_id` = #{bbs_p_id},
+		`bbs_writer` = #{bbs_writer},
+		`bbs_date` = #{bbs_date},
+		`bbs_time` = #{bbs_time},
+		`bbs_subject` = #{bbs_subject},
+		`bbs_content` = #{bbs_content},
+		`bbs_count` = #{bbs_count}
+		WHERE `BBS_ID` = #{bbs_id};
+
+ 	</update>
+ 
+ </mapper> 

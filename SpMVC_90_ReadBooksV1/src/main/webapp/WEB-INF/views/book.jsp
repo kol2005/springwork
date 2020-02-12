@@ -9,14 +9,25 @@
 <meta charset="UTF-8">
 <title>도서 리스트</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
-<script	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.css"	rel="stylesheet">
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.ui.position.min.js"></script>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <script>
 
 function bookinfo(b_code){
@@ -91,43 +102,76 @@ $(function(){
 </script>
 
 </head>
-<body>
+
+<style>
+header h1{
+color: #297bff;
+display: flex;
+justify-content: center;
+margin: 20px;
+padding: 20px;
+}
+
+h1{
+background-color: #ffdd57;
+font-weight: bold;
+}
+
+th{
+font-weight: bold;
+}
+
+#main-table {
+justify-content: center;
+width: 150%;
+margin-left: -25%;
+}
+
+#main-table th:nth-of-type(1),#main-table td:nth-of-type(1){width: 10%;}
+#main-table th:nth-of-type(2),#main-table td:nth-of-type(2){width: 30%;}
+#main-table th:nth-of-type(3),#main-table td:nth-of-type(3){width: 20%;}
+#main-table th:nth-of-type(4),#main-table td:nth-of-type(4){width: 15%;}
+#main-table th:nth-of-type(5),#main-table td:nth-of-type(5){width: 10%;}
+#main-table th:nth-of-type(6),#main-table td:nth-of-type(6){width: 10%;}
+
+</style>
 <header>
-<h3>도서 리스트</h3>
+<h1>도서 리스트</h1>
 </header>
-	<table>
-	<tr>
-	<td>도서코드</td>
-	<td>도서명</td>
-	<td>저자</td>
-	<td>출판사</td>
-	<td>구입일자</td>
-	<td>구입가격</td>
-	</tr>
+<body>
+
+<div class="container">
+	<table id="main-table" class="table table-bordered">
+		<tr class="table-dark text-dark">
+			<th>도서코드</th>
+			<th>도서명</th>
+			<th>저자</th>
+			<th>출판사</th>
+			<th>구입일자</th>
+			<th>구입가격</th>
+		</tr>
 	
 		<tr>
-		<td>
 		<c:if test="${!empty bookList}">
 		<c:forEach items="${bookList}" var="books">
-			<tr class="books-l" onclick="bookinfo('${books.b_code}')">
-			<td class="books-list">${books.b_code}</td>
-			<td class="books-list">${books.b_name}</td>
-			<td class="books-list">${books.b_auther}</td>
-			<td class="books-list">${books.b_comp}</td>
-			<td class="books-list">${books.b_year}</td>
-			<td class="books-list">${books.b_iprice}</td>
+			<tr class="books-l table-active" onclick="bookinfo('${books.b_code}')">
+				<td class="books-list">${books.b_code}</td>
+				<td class="books-list">${books.b_name}</td>
+				<td class="books-list">${books.b_auther}</td>
+				<td class="books-list">${books.b_comp}</td>
+				<td class="books-list">${books.b_year}</td>
+				<td class="books-list">${books.b_iprice}</td>
 			</tr>
 		</c:forEach>
 		</c:if>
-		</td>
 		</tr>
 	</table>
-	<section>
-	<button id="btn_book_insert" class="bz-button">도서정보 새로입력</button>
-	<button id="btn_list" class="bz-button">리스트</button>
-	</section>
-	
+</div>
 
+	<section>
+	<button id="btn_book_insert" class="bz-button btn btn-success">도서정보 새로입력</button>
+	<button id="btn_list" class="bz-button  btn btn-primary">리스트</button>
+	</section>
 	
 </body>
 </html>

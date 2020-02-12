@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.biz.friend.repository.FriendDao">
+
+<insert id="insert">
+INSERT INTO `tbl_friend`
+		(
+		`F_NAME`,
+		`F_TEL`,
+		`F_ADDR`,
+		`F_HOBBY`,
+		`F_RELATION`
+		)
+	VALUES
+		(
+		#{f_name},
+		#{f_tel},
+		#{f_addr},
+		#{f_hobby},
+		#{f_relation}
+		)
+</insert>
+
+<update id="update">
+	UPDATE `tbl_friend`
+		SET
+			`f_name` = #{f_name},
+			`f_tel` = #{f_tel},
+			`f_addr` = #{f_addr},
+			`f_hobby` = #{f_hobby},
+			`f_relation` = #{f_relation}
+		WHERE `F_ID` = #{f_id};
+</update>
+
+<select id="findBySearch">
+SELECT * FROM tbl_friend
+WHERE f_name LIKE CONCAT('%', #{f_name},'%')
+</select>
+ 
+ </mapper> 

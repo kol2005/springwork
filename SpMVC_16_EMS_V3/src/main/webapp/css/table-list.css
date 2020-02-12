@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+/*
+tag.class 또는 tag#id 형식으로 selector를 지정하는 이유
+tag 전체에 style을 입히지 않고
+특정한 tag에 class나 id가 설정된 곳에만 style을 입히겠다 라는 것
+*/
+table.table{
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 95%;
+	border: 1px solid #ccc;
+	margin: 10px auto;
+}
+
+/*
+table의 line(tr)에 한줄씩 건너뒤어 바탕색을 달리하여
+데이터를 쉽게 볼수 있게 하는 방식
+*/
+
+
+table.table tr {
+	border: 1px solid #ddd;
+}
+
+table.table tr:nth-child(even) {
+	border: 1px solid #ccc;
+}
+
+table.table tr:nth-child(odd) {
+	border: 1px solid #eee;
+}
+
+
+
+/*
+tag.class 또는 tag#id 형식으로 selector를 지정하는 이유
+tag 전체에 style을 입히지 않고
+특정한 tag에 class나 id가 설정된 곳에만 style을 입히겠다 라는 것
+*/
+
+
+table.main-list {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width:95%;
+	border:1px solid #ccc;
+	margin:10px auto;
+}
+
+table.main-list th{
+	background-color: #828282;
+	font-size: 20px;
+}
+
+table.main-list tr {
+	border :1px solid #ddd;
+}
+
+table.main-list td {
+	background-color: #ababab;
+}
+
+/*
+table의 line(tr)에 한줄씩 건너뛰어 바탕색을 달리하여
+데이터를 쉽게 볼수 있게 하는 방식
+*/
+table.main-list tr:nth-child(even) {
+	border :1px solid #ccc;
+}
+
+table.main-list tr:nth-child(odd) {
+	border : 1px solid #eee;
+}

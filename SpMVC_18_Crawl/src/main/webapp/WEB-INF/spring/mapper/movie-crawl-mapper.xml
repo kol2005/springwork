@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.biz.crawl.persistence.NaverDao">
+
+<insert id="insert">
+INSERT INTO `tbl_movie`
+		(
+
+		`m_rank`,
+		`m_title`,
+		`m_detail_url`,
+		`m_image_url`
+		)
+	VALUES
+		(
+
+		#{m_rank},
+		#{m_title},
+		#{m_detail_url},
+		#{m_image_url}
+		);
+</insert>
+
+<insert id="insertAll">
+INSERT INTO `tbl_movie`
+		(
+	
+		`m_rank`,
+		`m_title`,
+		`m_detail_url`,
+		`m_image_url`
+		)
+	VALUES
+	<foreach collection="list" item="vo" separator=" , ">
+		(
+
+		#{vo.m_rank},
+		#{vo.m_title},
+		#{vo.m_detail_url},
+		#{vo.m_image_url}
+		)
+	</foreach>
+	
+</insert>
+ 
+ </mapper> 

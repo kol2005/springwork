@@ -47,7 +47,13 @@ $(function(){
 		<li data-menu="list" data-menu-name="홈으로">EMS</li>
 		<li data-menu="bbs/free">자유게시판</li>
 		<li data-menu="bbs/notice">공지사항</li>
-		<li data-menu="member/login">로그인</li>
-		<li data-menu="member/join">회원가입</li>
+		<c:if test="${empty MEMBER}">
+			<li data-menu="member/login">로그인</li>
+			<li data-menu="member/join">회원가입</li>
+		</c:if>
+		<c:if test="${!empty MEMBER}">
+			<li data-menu="member/logout">로그아웃</li>
+			<li data-menu="member/logout">${MEMBER.nickname}(${MEMBER.email})</li>
+		</c:if>
 	</ul>
 </nav>

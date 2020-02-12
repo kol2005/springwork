@@ -10,13 +10,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
-<script src="${rootPath}/javascript/summernote-ko-KR.js"></script>
-
-<link
 	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.css"
 	rel="stylesheet">
 <script
@@ -26,6 +19,17 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 $(function(){
 	
@@ -44,28 +48,49 @@ $(function(){
 	
 })
 </script>
+<style>
+
+header h1{
+color: #297bff;
+display: flex;
+justify-content: center;
+margin: 20px;
+padding: 20px;
+}
+
+h1{
+background-color: #ffdd57;
+font-weight: bold;
+}
+
+th{
+font-weight: bold;
+}
+
+</style>
 </head>
 <header>
 <h1>도서정보</h1>
 </header>
 <body>
-	<table id="rbook-list">
-	<tr>
-		<td>사용자 ID</td>
-		<td>도서코드</td>
-		<td>도서제목</td>
-		<td>독서일자</td>
-		<td>한줄소감</td>
-		<td>별점</td>
+<div class="container">
+	<table id="rbook-list" class="table table-bordered">
+	<tr class="table-dark text-dark">
+		<th>사용자 ID</th>
+		<th>도서코드</th>
+		<th>도서제목</th>
+		<th>독서일자</th>
+		<th>한줄소감</th>
+		<th>별점</th>
 	</tr>
 	
 	<tr>
-	<td>
+
 	<c:if test="${!empty rbList}">
 	
 	<c:forEach items="${rbList}" var="rbook">
 	<tbody>
-		<tr data-id="${rbook.rb_seq}">
+		<tr data-id="${rbook.rb_seq}" class="table-active">
 		<td>사용자ID</td>
 		<td>${rbook.rb_bcode}</td>
 		<td>${rbook.rb_bname}</td>
@@ -77,14 +102,15 @@ $(function(){
 	</c:forEach>
 
 	</c:if>
-	</td>
+
 	</tr>
 	
 	</table>
+</div>
 	
 	<section>
-		<button id="btn_book_list" class="bz-button">도서 리스트</button>
-		<button id="btn_read_insert" class="bz-button">독서 리스트 작성</button>
+		<button id="btn_book_list" class="bz-button btn btn-primary">도서 리스트</button>
+		<button id="btn_read_insert" class="bz-button btn btn-success">독서 리스트 작성</button>
 	</section>
 
 </body>
