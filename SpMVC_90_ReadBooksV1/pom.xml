@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.biz</groupId>
 	<artifactId>readbooks</artifactId>
-	<name>SpMVC_13_ReadBooks</name>
+	<name>SpMVC_90_ReadBooks</name>
 	
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>

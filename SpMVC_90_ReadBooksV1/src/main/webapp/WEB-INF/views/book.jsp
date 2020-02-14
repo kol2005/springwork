@@ -14,17 +14,12 @@
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.contextMenu.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.9.0/jquery.ui.position.min.js"></script>
 
-
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
@@ -108,7 +103,7 @@ header h1{
 color: #297bff;
 display: flex;
 justify-content: center;
-margin: 20px;
+margin: 10px;
 padding: 20px;
 }
 
@@ -126,6 +121,18 @@ justify-content: center;
 width: 150%;
 margin-left: -25%;
 }
+.navbar{
+justify-content: center;
+text-align: center;
+}
+.navbar-nav{
+justify-content: center;
+text-align: center;
+}
+.nav-item{
+margin: 10px;
+padding: 10px;
+}
 
 #main-table th:nth-of-type(1),#main-table td:nth-of-type(1){width: 10%;}
 #main-table th:nth-of-type(2),#main-table td:nth-of-type(2){width: 30%;}
@@ -139,6 +146,13 @@ margin-left: -25%;
 <h1>도서 리스트</h1>
 </header>
 <body>
+
+	<nav class="navbar navbar-expand-sm navbar-dark">
+		<ul class="navbar-nav">
+			<li id="btn_book_insert" class="nav-item active bz-button btn btn-success">도서정보 새로입력</li>
+			<li id="btn_list" class="nav-item active bz-button btn btn-primary">리스트</li>
+		</ul>
+	</nav>
 
 <div class="container">
 	<table id="main-table" class="table table-bordered">
@@ -166,12 +180,10 @@ margin-left: -25%;
 		</c:if>
 		</tr>
 	</table>
+
 </div>
 
-	<section>
-	<button id="btn_book_insert" class="bz-button btn btn-success">도서정보 새로입력</button>
-	<button id="btn_list" class="bz-button  btn btn-primary">리스트</button>
-	</section>
+
 	
 </body>
 </html>

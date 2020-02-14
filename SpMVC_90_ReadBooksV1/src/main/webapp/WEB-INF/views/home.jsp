@@ -72,9 +72,10 @@ font-weight: bold;
 <header>
 <h1>도서정보</h1>
 </header>
-<body>
+<body class="container p-3 my-3 border">
 <div class="container">
 	<table id="rbook-list" class="table table-bordered">
+	<thead>
 	<tr class="table-dark text-dark">
 		<th>사용자 ID</th>
 		<th>도서코드</th>
@@ -83,7 +84,7 @@ font-weight: bold;
 		<th>한줄소감</th>
 		<th>별점</th>
 	</tr>
-	
+	</thead>
 	<tr>
 
 	<c:if test="${!empty rbList}">
@@ -102,13 +103,13 @@ font-weight: bold;
 	</c:forEach>
 
 	</c:if>
-
 	</tr>
+
 	
 	</table>
 </div>
 	
-	<section>
+	<section class="container p-3 my-3">
 		<button id="btn_book_list" class="bz-button btn btn-primary">도서 리스트</button>
 		<button id="btn_read_insert" class="bz-button btn btn-success">독서 리스트 작성</button>
 	</section>

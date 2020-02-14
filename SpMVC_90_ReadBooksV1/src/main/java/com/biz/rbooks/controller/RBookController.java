@@ -45,11 +45,11 @@ public class RBookController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/search",method=RequestMethod.POST)
+	@RequestMapping(value="/search",method=RequestMethod.GET)
 	public String search(@RequestParam(value="strText",required = false,defaultValue = "")String strText,Model model) {
 		List<BooksVO> bookList = bService.findByBNames(strText);
 		model.addAttribute("BLIST",bookList);
-		return "rbook/insert";
+		return "rbooks/search";
 	}
 	
 	@RequestMapping(value="/rbookinfo/{rb_seq}",method=RequestMethod.GET)

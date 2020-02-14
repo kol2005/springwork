@@ -50,8 +50,7 @@ public class BookController {
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
-	public String binsert(BooksVO booksVO,
-			Model model) {
+	public String binsert(BooksVO booksVO,Model model) {
 		//BooksVO bookVO = (BooksVO)httpSession.getAttribute("booksVO");
 		//model.addAttribute("bookVO",booksVO);
 		
@@ -68,7 +67,7 @@ public class BookController {
 		model.addAttribute("booksVO",booksVO);
 		return "books/update";
 	}
-	@RequestMapping(value="/bookinfo",method=RequestMethod.POST)
+	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public String bookupdate(@ModelAttribute("booksVO")BooksVO booksVO, Model model) {
 		
 		int ret = bService.update(booksVO);
@@ -76,15 +75,22 @@ public class BookController {
 		return "redirect:/books/list";
 	}
 	
-	
-	//@ResponseBody
-	@RequestMapping(value="/delete",method=RequestMethod.POST)
-	public String delete(@RequestParam("b_code") String b_code,SessionStatus status,Model model) {
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
+	public String delete(@RequestParam("id") String b_code,Model model) {
 		//int ret = bService.delete(Long.valueOf(booksVO.getB_code()));
 		int ret = bService.delete(b_code);
-		status.setComplete();
 		//return "redirect:/books/list";
 		return "redirect:/books/list";
 	}
 	
+	
+	//@ResponseBody
+//	@RequestMapping(value="/delete",method=RequestMethod.POST)
+//	public String delete(@RequestParam("b_code") String b_code,SessionStatus status,Model model) {
+//		//int ret = bService.delete(Long.valueOf(booksVO.getB_code()));
+//		int ret = bService.delete(b_code);
+//		status.setComplete();
+//		//return "redirect:/books/list";
+//		return "redirect:/books/list";
+//	}
 }
